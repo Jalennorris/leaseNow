@@ -1,0 +1,131 @@
+.floorplans-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px; /* Increased padding for more spacious feel */
+    border-bottom: 2px solid #e0e0e0; /* Softer border color */
+    border-radius: 12px; /* Slightly more rounded corners */
+    max-width: 1200px; /* Optional: limits width for larger screens */
+    margin: 0 auto; /* Center the container horizontally */
+    background-color: #ffffff; /* White background for cleanliness */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.floorplans-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px; /* More space below header */
+    font-family: 'Arial', sans-serif; /* Modern font choice */
+}
+
+.floorplans-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Title and Description Styles */
+.floorplans-title {
+    font-size: 2.5rem; /* Larger font size for title */
+    color: #333; /* Darker color for readability */
+    margin: 0; /* Remove default margin */
+    font-weight: bold; /* Bold for emphasis */
+}
+
+.floorplans-description {
+    font-size: 1.2rem; /* Slightly larger than normal text */
+    color: #666; /* Softer color for description */
+    max-width: 800px; /* Limit width for better readability */
+    margin-top: 10px; /* Space between title and description */
+}
+
+.floorplans-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.floorplans-search {
+    display: flex;
+    flex-direction: row; /* Row layout for the search inputs */
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px; /* Increased spacing for better visual separation */
+    flex-wrap: wrap; /* Allow wrapping for better responsiveness */
+    padding: 15px; /* Padding inside the search container */
+    border: 1px solid #e1e1e1; /* Light border color */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.floorplans-search select,
+.floorplans-search input {
+    width: 200px; /* Fixed width */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
+}
+
+.floorplans-search select:focus,
+.floorplans-search input:focus {
+    border-color: #007BFF; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add shadow on focus */
+}
+
+
+/* Optional: Button Styles */
+.floorplans-search button {
+    padding: 10px 20px; /* More padding for button */
+    font-size: 16px;
+    background-color: #007BFF; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+.floorplans-search button:hover {
+    background-color: #0056b3; /* Darken on hover */
+    transform: translateY(-1px); /* Slight lift effect on hover */
+}
+
+/* Optional: Responsive Design */
+@media (max-width:768px) {
+    .floorplans-container {
+        padding: 30px; /* Less padding on small screens */
+    }
+
+    .floorplans-title {
+        font-size: 2rem; /* Adjust title size for mobile */
+    }
+
+    .floorplans-description {
+        font-size: 1rem; /* Adjust description size for mobile */
+    }
+    .floorplans-search {
+        flex-direction: column; /* Stack filters on small screens */
+        align-items: stretch; /* Stretch to full width */
+    }
+
+    .floorplans-search select,
+    .floorplans-search input {
+        width: 95%; /* Full width on small screens */
+    }
+
+    .floorplans-search button {
+        width: 100%; /* Full width button */
+    }
+}

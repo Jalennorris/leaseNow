@@ -10,6 +10,7 @@ import luxuryAmenities from '../../images/luxury-amenities.jpg'
 import petFriendly from '../../images/pet-friendly.jpg'
 
 import floorplans from '../../images/floor-plan.jpg'
+import FloorPlans from "../../images/floorplan.jpg";
 import Footer from "../../components/footer/footer";
 
 
@@ -72,7 +73,7 @@ const Home =() => {
 
             <section className="home-section4">
                 <div className="section4-img-content">
-                    <img src={floorplans} alt="section4" className="section4-image"/>
+                    <img src={FloorPlans} alt="section4" className="section4-image"/>
                 </div>
 
                 <div className="section4-text-content">
