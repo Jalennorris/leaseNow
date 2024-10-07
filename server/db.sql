@@ -57,4 +57,3 @@ CREATE TABLE reviews (
 
 
 
-/* git reset --soft HEAD~5  */
