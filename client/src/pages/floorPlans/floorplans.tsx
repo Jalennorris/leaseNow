@@ -21,6 +21,9 @@ const FloorPlans: React.FC = () => {
         zip_code: string;
         rent_price: number;
         description: string;
+        bed: number;
+        bath: number;
+        total_sqft: number;
     }
     
 
@@ -132,17 +135,16 @@ const FloorPlans: React.FC = () => {
                 ) : (
                     data.map((floorPlan) => (
                     <div  className="floorplans-item" key={floorPlan.property_id}>
-                        <h2>{floorPlan.title}</h2>
-                        <p>{floorPlan.address}</p>
-                        <p>
-                        {floorPlan.city}, {floorPlan.state}
-                        </p>
-                        <p>{floorPlan.zip_code}</p>
+                        <p>{floorPlan.bed} - {floorPlan.bath}</p>
+                        <p>{floorPlan.total_sqft}</p>
                         <p>{floorPlan.rent_price}</p>
-                        <p>{floorPlan.description}</p>
+                        <button>Book Now</button>
                     </div>
+                  
+                    
                     ))
                 )}
+                 
                 </div>
         </div>
     );

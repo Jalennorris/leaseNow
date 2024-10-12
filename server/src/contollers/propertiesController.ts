@@ -6,20 +6,22 @@ export default {
     // Create a new property
     createProperty: async (req: Request, res: Response): Promise<void> => {
         try {
-            const { title, address, city, state, zip_code, rent_price, description } = req.body;
+            const { title, address, city, state, zip_code, rent_price, description,floor,bed, bath, total_sqft,deposit } = req.body;
 
             // Validate input fields
-            if (!title || !address || !city || !state || !zip_code || !description || !rent_price) {
+          
+                if (!title || !address || !city || !state || !zip_code || !description || !rent_price || !floor || !bed || !bath || !total_sqft || !deposit) {
                 res.status(400).json({
                     status: false,
                     message: 'All fields are required',
                 });
                 return;
             }
+                
 
             // Insert query
-            const insertQuery = 'INSERT INTO properties (title, address, city, state, zip_code, rent_price, description) VALUES ($1, $2, $3, $4, $5, $6,$7) RETURNING *';
-            const insertValues = [title, address, city, state, zip_code, rent_price, description];
+            const insertQuery = 'INSERT INTO properties (title, address, city, state, zip_code, rent_price, description, floor, bed, bath, total_sqft, deposit) VALUES ($1, $2, $3, $4, $5, $6,$7, $8, $9, $10, $11, $12) RETURNING *';
+            const insertValues = [title, address, city, state, zip_code, rent_price, description, floor, bed, bath, total_sqft];
 
             // Execute query
             const result = await pool.query(insertQuery, insertValues);

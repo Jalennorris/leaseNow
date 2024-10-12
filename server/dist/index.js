@@ -14,7 +14,7 @@ import reviewRoute from './routes/reviewRoute..js';
 //node dist/index.js
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 4000; // Default to 3000 if PORT is not defined
+const port = process.env.PORT || 4000;
 let key, cert;
 try {
     key = fs.readFileSync('./key.pem');
@@ -27,13 +27,13 @@ catch (err) {
 const credentials = { key, cert };
 // Middleware
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 15 * 60 * 1000,
     max: 100
 });
 app.use(limiter);
-app.use(helmet()); // Added Helmet for security
+app.use(helmet());
 app.use(cors({
-    origin: "*" // Consider restricting this in production
+    origin: "*"
 }));
 app.use(cookieParser());
 app.use(express.json());
@@ -72,7 +72,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({
         status: false,
         message: 'Internal Server Error',
-        error: err.message // Include error message for debugging
+        error: err.message
     });
 });
 // Create HTTPS server

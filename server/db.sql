@@ -20,6 +20,13 @@ CREATE TABLE properties (
     rent_price DECIMAL(10, 2) NOT NULL,
     description TEXT
 );
+    Alter table properties add column floor int;
+    Alter table properties add column bed int;
+    Alter table properties add column bath int;
+    Alter table properties add column total_sqft int;
+    ALTER TABLE properties ADD COLUMN deposit DECIMAL(10, 2);
+
+
 
 CREATE TABLE leases (
     lease_id SERIAL PRIMARY KEY,
