@@ -125,19 +125,12 @@ export default {
     updateProperty: async (req: Request, res: Response): Promise<void> => {
         const { id } = req.params;
         try {
-            const { title, address, city, state, zip_code, rent_price, description } = req.body;
+            const { title, address, city, state, zip_code, rent_price, description, floor, bed, bath, total_sqft } = req.body;
 
-            // Validate input fields
-            if (!title || !address || !city || !state || !zip_code || !description || !rent_price) {
-                res.status(400).json({
-                    status: false,
-                    message: 'All fields are required for update',
-                });
-                return;
-            }
-
-            const updateQuery = 'UPDATE properties SET title = $1, address = $2, city = $3, state = $4, zip_code = $5, rent_price = $6, description = $7 WHERE property_id = $8 RETURNING *';
-            const updateValues = [title, address, city, state, zip_code, rent_price, description, id];
+        
+       
+            const updateQuery = 'UPDATE properties SET title = $1, address = $2, city = $3, state = $4, zip_code = $5, rent_price = $6, description = $7, floor = $8, bed = $9, bath = $10, total_sqft = $11 WHERE property_id = $12 RETURNING *';
+            const updateValues = [title, address, city, state, zip_code, rent_price, description, floor, bed, bath, total_sqft, id];
             const result = await pool.query(updateQuery, updateValues);
             const updatedProperty = result.rows[0];
 
