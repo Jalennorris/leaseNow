@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './floorplans.css';
 import Navigation from "../../components/header/navigation";
+import Footer from "../../components/footer/footer";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faBath, faExpand } from "@fortawesome/free-solid-svg-icons";
@@ -125,6 +126,7 @@ const FloorPlans: React.FC = () => {
                     ))
                 )}
             </div>
+            <Footer/>
         </div>
     );
 };
