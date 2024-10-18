@@ -3,9 +3,12 @@ import axios from 'axios';
 import './reservePlan.css';
 import Navigation from "../../components/header/navigation";
 import useStore from "../../store/store";
+import floorPlans from '../../images/floorplans.webp';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBed, faBath, faRulerCombined, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 interface Property {
-    rent: number;
+    rent_price: number;
     deposit: number;
     bed: number;
     bath: number;
@@ -14,12 +17,16 @@ interface Property {
 }
 
 interface ApiResponse {
-    data: Property[];
+    status: boolean;
+    data: {
+        [key: string]: Property;
+    };
+    message: string;
 }
 
 const ReservePlan: React.FC = () => {
     const [property, setProperty] = useState<Property | null>(null);
-    const { getPropertyId, setPropertyId } = useStore();
+    const { getPropertyId } = useStore();
 
     const propertyId = getPropertyId();
 
@@ -32,9 +39,10 @@ const ReservePlan: React.FC = () => {
 
             try {
                 const response = await axios.get<ApiResponse>(`/api/api/properties/${propertyId}`);
-                const properties = response.data.data;
-                if (properties && properties.length > 0) {
-                    setProperty(properties[0]);
+                const propertyData = response.data.data;
+                
+                if (propertyData) {
+                    setProperty(propertyData);
                 } else {
                     console.log('No property found');
                 }
@@ -46,22 +54,42 @@ const ReservePlan: React.FC = () => {
         getProperty();
     }, [propertyId]);
 
- 
     return (
         <div>
             <Navigation />
             <div className="reservePlan-container">
-                <div className="ReservePlan-section1">
-                    <img src='*' alt="ReservePlan" className="ReservePlan-image" />
-                </div>
-                <h1>Reserve Plan for Property {propertyId}</h1>
-                <div>
-                    <p>Rent: ${property.rent}</p>
-                    <p>Deposit: ${property.deposit}</p>
-                    <p>Bedrooms: {property.bed}</p>
-                    <p>Bathrooms: {property.bath}</p>
-                    <p>Total Area: {property.total_sqft} sq ft</p>
-                </div>
+                <h1 className="reservePlan-container-title">Reserve Your New Home</h1>
+                {!property ? (
+                    <div className="loading">
+                        <h2>Loading property details...</h2>
+                        <div className="spinner"></div>
+                    </div>
+                ) : (
+                    <div className="property-details">
+
+                       
+                        <img src={floorPlans} alt="Floor Plan" className="floorplan-image" />
+                        <div className="details-grid">
+                            <div className="detail-item">
+                                <FontAwesomeIcon icon={faDollarSign} />
+                                <p>Rent: <strong>${property.rent_price}/Month</strong></p>
+                            </div>
+                            <div className="detail-item">
+                                <FontAwesomeIcon icon={faBed} />
+                                <p>Bedrooms: <strong>{property.bed}</strong></p>
+                            </div>
+                            <div className="detail-item">
+                                <FontAwesomeIcon icon={faBath} />
+                                <p>Bathrooms: <strong>{property.bath}</strong></p>
+                            </div>
+                            <div className="detail-item">
+                                <FontAwesomeIcon icon={faRulerCombined} />
+                                <p>Total Area: <strong>{property.total_sqft} sq ft</strong></p>
+                            </div>
+                        </div>
+                      
+                    </div>
+                )}
             </div>
         </div>
     );
