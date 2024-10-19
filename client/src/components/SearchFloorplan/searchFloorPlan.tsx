@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import './searchFloorPlan.css';
 
 interface SearchFloorPlansProps {
@@ -10,6 +10,8 @@ interface SearchFloorPlansProps {
   setMoveInDate: (value: string) => void;
   priceRange: number;
   setPriceRange: (value: number) => void;
+  sortCriteria: string;
+  setSortCriteria: (value: string) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -22,10 +24,10 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
   setMoveInDate,
   priceRange,
   setPriceRange,
+  sortCriteria,
+  setSortCriteria,
   onSubmit,
 }) => {
-
-  
   return (
     <form className="floorplans-search" onSubmit={onSubmit}>
       <div className="filter-box">
@@ -36,11 +38,13 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
           value={bedrooms}
           onChange={(e) => setBedrooms(Number(e.target.value))}
         >
+          <option value="0">Any</option>
           <option value="1">1 Bedroom</option>
           <option value="2">2 Bedrooms</option>
           <option value="3">3 Bedrooms</option>
         </select>
       </div>
+
       <div className="filter-box">
         <label htmlFor="bathrooms">Bathrooms</label>
         <select
@@ -49,11 +53,13 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
           value={bathrooms}
           onChange={(e) => setBathrooms(Number(e.target.value))}
         >
+          <option value="0">Any</option>
           <option value="1">1 Bathroom</option>
           <option value="2">2 Bathrooms</option>
           <option value="3">3 Bathrooms</option>
         </select>
       </div>
+
       <div className="filter-box">
         <label htmlFor="date">Move-in Date</label>
         <input
@@ -63,6 +69,7 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
           onChange={(e) => setMoveInDate(e.target.value)}
         />
       </div>
+
       <div className="filter-box">
         <label htmlFor="priceRange">Price Range</label>
         <input
@@ -74,6 +81,20 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
           onChange={(e) => setPriceRange(Number(e.target.value))}
         />
       </div>
+
+      <div className="filter-box">
+        <label htmlFor="sortCriteria">Sort by:</label>
+        <select
+          name="sortCriteria"
+          id="sortCriteria"
+          value={sortCriteria}
+          onChange={(e) => setSortCriteria(e.target.value)}
+        >
+          <option value="price">Price (low to high)</option>
+          <option value="size">Size (small to large)</option>
+        </select>
+      </div>
+
       <button type="submit">Search</button>
     </form>
   );
