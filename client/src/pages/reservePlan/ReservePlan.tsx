@@ -91,6 +91,21 @@ const ReservePlan: React.FC = () => {
                     </div>
                 )}
             </div>
+            <div className="reservePlan-container-leasing">
+                <h1 className="reservePlan-container-leasing-title">Leasing Information</h1>
+                <label className="reservePlan-container-leasing-label">Move-in Date (YYYY-MM-DD) </label>
+                <input className="reservePlan-container-leasing-input" type="date" />
+                <label className="reservePlan-container-leasing-label">Lease Term:</label>
+                <select className="reservePlan-container-leasing-select">
+                    <option value="3">3 Months</option>
+                    <option value="6">6 Months</option>
+                    <option value="9">12 Months</option>
+                    <option value="12">1 Year </option>
+                    <option value="13">13 Months </option>
+                </select> 
+                <label className="reservePlan-container-leasing-label">Rent:</label>
+                <button>Start Application</button>
+            </div>
         </div>
     );
 };

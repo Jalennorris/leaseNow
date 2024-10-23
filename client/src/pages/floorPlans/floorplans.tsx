@@ -47,7 +47,7 @@ const FloorPlans: React.FC = () => {
   const [bedrooms, setBedrooms] = useState<number>(1);
   const [bathrooms, setBathrooms] = useState<number>(1);
   const [moveInDate, setMoveInDate] = useState<string>('');
-  const [priceRange, setPriceRange] = useState<number>(1);
+  const [priceRange, setPriceRange] = useState<number>(0);
   const [data, setData] = useState<FloorPlan[]>([]);
   const [filteredData, setFilteredData] = useState<FloorPlan[]>([]);
   const { propertyId, setPropertyId } = useStore();
@@ -195,6 +195,7 @@ const FloorPlans: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
+    
   }, [isFetching]);
 
   useEffect(() => {
@@ -204,6 +205,16 @@ const FloorPlans: React.FC = () => {
     }
     setIsFetching(false);
   }, [isFetching, currentPage, totalPages]);
+
+  const handleRest  = () => {
+    setBedrooms(1);
+    setBathrooms(1);
+    setMoveInDate('');
+    setPriceRange(0);
+    setSortCriteria('price');
+    window.location.reload();
+   
+  }
 
   return (
     <div className="floorplans">
@@ -227,6 +238,7 @@ const FloorPlans: React.FC = () => {
             sortCriteria={sortCriteria}
             setSortCriteria={setSortCriteria}
             onSubmit={handleSubmit}
+            onRest={handleRest}
           />
         </div>
       </div>
@@ -257,11 +269,12 @@ const FloorPlans: React.FC = () => {
                   <LazyLoadImage
                     src={FloorPlansImage}
                     alt={`Floor plan for ${floorPlan.title}`}
-                    className="floorplan-image"
+                    className="floorplans-image"
                     effect="blur"
+                   
                   />
                   <div className="floorplan-details">
-                    <h2 className="floorplan-title">{floorPlan.title}</h2>
+                   
                     <p className="floorplan-address">
                       {floorPlan.address}, {floorPlan.city}, {floorPlan.state} {floorPlan.zip_code}
                     </p>
@@ -279,7 +292,7 @@ const FloorPlans: React.FC = () => {
                     </div>
                     <p className="floorplan-price">${floorPlan.rent_price.toLocaleString()} /mo</p>
                     <button
-                      className="floorplan-reserve-button"
+                      className="floorplans-button"
                       onClick={() => handleReserve(floorPlan.property_id)}
                     >
                       Reserve Now
@@ -289,7 +302,12 @@ const FloorPlans: React.FC = () => {
               ))}
             </div>
 
-            <div className="pagination-container">
+            
+          </>
+        )}
+        
+      </div>
+      <div className="pagination-container">
               <button
                 className={`pagination-button ${currentPage === 1 ? 'disabled' : ''}`}
                 onClick={() => paginate(currentPage - 1)}
@@ -308,9 +326,6 @@ const FloorPlans: React.FC = () => {
                 <FontAwesomeIcon icon={faChevronRight} />
               </button>
             </div>
-          </>
-        )}
-      </div>
       <Footer />
     </div>
   );

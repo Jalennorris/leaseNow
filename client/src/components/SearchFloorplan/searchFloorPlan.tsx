@@ -13,6 +13,7 @@ interface SearchFloorPlansProps {
   sortCriteria: string;
   setSortCriteria: (value: string) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onRest : () => void;
 }
 
 const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
@@ -27,6 +28,7 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
   sortCriteria,
   setSortCriteria,
   onSubmit,
+  onRest
 }) => {
   return (
     <form className="floorplans-search" onSubmit={onSubmit}>
@@ -96,6 +98,7 @@ const SearchFloorPlans: React.FC<SearchFloorPlansProps> = ({
       </div>
 
       <button type="submit">Search</button>
+      <button  type="button" className="reset-button" onClick={onRest} >Reset </button>
     </form>
   );
 };
