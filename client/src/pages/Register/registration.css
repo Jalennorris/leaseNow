@@ -1,0 +1,116 @@
+.register-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px
+}
+
+.register-title{
+    font-family: 'impact', Courier, monospace, 'Segoe UI', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bolder;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+}
+
+.register-subtitle{
+    font-family: 'impact', Courier, monospace, 'Segoe UI', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+
+    width: 50%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.register-label{
+    font-family: 'impact', Courier, monospace, 'Segoe UI', sans-serif;
+    font-size: 20px;
+    text-align: left;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+.register-input{
+    font-family: 'Times New Roman', Courier, monospace;
+    color: rgb(75, 73, 73);
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+
+}
+
+.register-select{
+    font-family: 'Times New Roman', Courier, monospace;
+    color: rgb(75, 73, 73);
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+}
+
+.register-option{
+    font-family: 'Times New Roman', Courier, monospace;
+    color: rgb(75, 73, 73);
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+}
+
+.register-button{
+    background-color: #070807;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.register-button:hover{
+    background-color: rgb(95, 169, 219);
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+.register-text{
+    font-family: 'Times New Roman', Courier, monospace;
+    color: rgb(75, 73, 73);
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.register-text a{
+    color: rgb(95, 169, 219);
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Times New Roman', Courier, monospace;
+}
+
