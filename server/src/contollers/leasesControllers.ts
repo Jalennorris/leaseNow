@@ -5,10 +5,10 @@ import cacheUtils from '../utils/cacheUtils.js'; // Import caching utility
 export default {
 
     createLease: async (req: Request, res: Response): Promise<void> => {
-        const { renter_id, property_id, start_date, end_date, monthly_rent, deposit } = req.body;
+        const { renter_id, property_id, lease_month , monthly_rent } = req.body;
 
         // Input validation
-        if (!renter_id || !property_id || !start_date || !end_date || !monthly_rent || !deposit) {
+        if (!renter_id || !property_id || !lease_month|| !monthly_rent ) {
             res.status(400).json({
                 status: false,
                 message: 'Missing required fields',
@@ -39,8 +39,8 @@ export default {
 
             // Insert into leases table
             const result = await pool.query(
-                'INSERT INTO leases (renter_id, property_id, start_date, end_date, monthly_rent, deposit) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [renter_id, property_id, start_date, end_date, monthly_rent, deposit]
+                'INSERT INTO leases (renter_id, property_id, lease_month , monthly_rent) VALUES ($1, $2, $3, $4) RETURNING *',
+                [renter_id, property_id, lease_month,monthly_rent]
             );
 
             // Clear cache

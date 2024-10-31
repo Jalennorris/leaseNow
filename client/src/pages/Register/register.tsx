@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import './registration.css';
+import './register.css';
 import Navigation from '../../components/header/navigation';
 import Footer from "../../components/footer/footer";
 
@@ -9,7 +9,7 @@ interface UserInformation {
     firstname: string;
     lastname: string;
     email: string;
-    sex: string;
+   
     phone: string;
     username: string;
     password: string;
@@ -20,7 +20,6 @@ const Register: React.FC = () => {
         firstname: '',
         lastname: '',
         email: '',
-        sex: '',
         phone: '',
         username: '',
         password: ''
@@ -32,18 +31,30 @@ const Register: React.FC = () => {
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
+            // Check if any field is empty
             if (Object.values(userInfo).some(field => field === '')) {
-                return setError('All fields are required');
+                setError('All fields are required');
+                return;
             }
+    
+            // Check if passwords match
             if (userInfo.password !== confirmPassword) {
-                return setError('Passwords do not match');
+                setError('Passwords do not match');
+                return;
             }
-            const response = await axios.post('/user/create', userInfo);
+    
+            // Send registration request
+            const response = await axios.post('/api/api/users', userInfo);
             console.log(response.data);
             navigate('/login');
+            
         } catch (error) {
-            console.log(`Something went wrong with register from frontend`, error);
-            setError('Something went wrong with registration');
+            console.error('Registration error:', error);
+            if (axios.isAxiosError(error) && error.response) {
+                setError(error.response.data.error || 'An error occurred during registration');
+            } else {
+                setError('An unexpected error occurred');
+            }
         }
     }
 
@@ -77,13 +88,6 @@ const Register: React.FC = () => {
 
                     <label className='register-label'>Email</label>
                     <input className='register-input' type="email" placeholder='Enter Email' name='email' value={userInfo.email} onChange={handleChange} required />
-
-                    <label className='register-label'>Legal Sex</label>
-                    <select className='register-select' required name='sex' value={userInfo.sex} onChange={handleChange}>
-                        <option value="">Select Sex</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
 
                     <label className='register-label'>Phone</label>
                     <input className='register-input' type="tel" placeholder='(xxx)xxx-xxxx' name='phone' value={userInfo.phone} onChange={handleChange} required />

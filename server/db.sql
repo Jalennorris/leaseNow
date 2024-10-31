@@ -25,6 +25,7 @@ CREATE TABLE properties (
     Alter table properties add column bath int;
     Alter table properties add column total_sqft int;
     ALTER TABLE properties ADD COLUMN deposit DECIMAL(10, 2);
+    
 
 
 
@@ -38,6 +39,19 @@ CREATE TABLE leases (
     deposit DECIMAL(10, 2) NOT NULL
    
 );
+
+
+Alter table leases add column lease_month int;
+ALTER TABLE leases
+DROP COLUMN start_date,
+DROP COLUMN end_date;
+
+Alter Table lease
+Drop column desposit
+
+
+
+
 
 
 CREATE TABLE payments (

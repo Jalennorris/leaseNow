@@ -5,6 +5,7 @@ import Home from './pages/home/home'
 import FloorPlans from './pages/floorPlans/floorplans'
 import ReservePlan from './pages/reservePlan/ReservePlan'
 import Register from './pages/Register/register'
+import Login from './pages/Login/login'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
           //
           <Route path='register' element={<Register />}/>
+          <Route path='login' element={<Login />}/>
 
         </Routes>
       </Router>

@@ -178,14 +178,14 @@ export default {
       const values = [username];
       const { rows } = await pool.query(query, values);
       if (rows.length === 0) {
-        res.status(401).json({ error: 'Invalid username or password' });
+        res.status(401).json({ error: 'Invalid username' });
         return;
       }
 
       const user = rows[0];
       const isValidPassword = bcrypt.compareSync(password, user.password);
       if (!isValidPassword) {
-        res.status(401).json({ error: 'Invalid username or password' });
+        res.status(401).json({ error: 'Invalid password' });
         return;
       }
 
