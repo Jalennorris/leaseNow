@@ -36,6 +36,7 @@ const ReservePlan: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [moveInDate, setMoveInDate] = useState<string>('');
     const [leaseTerm, setLeaseTerm] = useState<string>('12');
+    const [successfully, setSuccessfully] = useState<boolean>(false);
     const { getPropertyId } = useStore();
     const propertyId = getPropertyId();
     const renterId = localStorage.getItem('user_id');
@@ -48,7 +49,6 @@ const ReservePlan: React.FC = () => {
                 return;
             }
 
-           
             try {
                 const response = await axios.get<ApiResponse>(`/api/api/properties/${propertyId}`);
                 const propertyData = response.data.data;
@@ -69,16 +69,15 @@ const ReservePlan: React.FC = () => {
             return;
         }
 
-        if( !renterId){
+        if (!renterId) {
             navigate('/login')
-            setError("user not logged in. Please log in before leasing.");
-            console.log("user not logged in. Please log in before leasing.");
-
+            setError("User not logged in. Please log in before leasing.");
+            console.log("User not logged in. Please log in before leasing.");
+            return;
         }
 
-
         try {
-            const response = await axios.post<{ data: Lease }>('/api/leases', {
+            const response = await axios.post<{ data: Lease }>('/api/api/leases', {
                 property_id: propertyId,
                 renter_id: parseInt(renterId),
                 lease_month: leaseTerm,
@@ -87,6 +86,7 @@ const ReservePlan: React.FC = () => {
 
             if (response.data && response.data.data) {
                 console.log('Lease created successfully:', response.data.data);
+                setSuccessfully(true);
                 setLease(response.data.data);
                 setError(null);
             } else {
@@ -98,10 +98,6 @@ const ReservePlan: React.FC = () => {
         }
     };
 
-   
-
-
-   
     return (
         <div>
             <Navigation />
@@ -132,6 +128,7 @@ const ReservePlan: React.FC = () => {
                 setLeaseTerm={setLeaseTerm}
                 handleLease={handleLease}
                 error={error}
+                successfully={successfully}
             />
         </div>
     );
@@ -150,8 +147,9 @@ interface LeasingInfoProps {
     setMoveInDate: (date: string) => void;
     leaseTerm: string;
     setLeaseTerm: (term: string) => void;
-    handleLease: () => void;
+    handleLease: (e: React.FormEvent<HTMLFormElement>) => void;
     error: string | null;
+    successfully: boolean;
 }
 
 const LeasingInfo: React.FC<LeasingInfoProps> = ({ 
@@ -161,30 +159,37 @@ const LeasingInfo: React.FC<LeasingInfoProps> = ({
     leaseTerm, 
     setLeaseTerm, 
     handleLease,
-    error 
+    error,
+    successfully
 }) => (
     <div className="reservePlan-container-leasing">
         <h1 className="reservePlan-container-leasing-title">Leasing Information</h1>
-        <form className="reservePlan-container-leasing-form">
-          
-          
-            <label className="reservePlan-container-leasing-label">Lease Term:</label>
-            <select 
-                className="reservePlan-container-leasing-select"
-                value={leaseTerm}
-                onChange={(e) => setLeaseTerm(e.target.value)}
-            >
-                <option value="3">3 Months</option>
-                <option value="6">6 Months</option>
-                <option value="9">9 Months</option>
-                <option value="12">12 Months</option>
-                <option value="13">13 Months</option>
-            </select>
+        {successfully ? (
+            <div>
+                 <p>Lease created successfully!</p>
+                 <Link to='/residentPortal'>Return to Resident Portal</Link>
+            </div>
             
-            <label className="reservePlan-container-leasing-label">Rent: ${property?.rent_price}/Month</label>
-        </form>
-        {error && <p className="error-message">{error}</p>}
-        <button onClick={handleLease} className="reservePlan-container-leasing-button">Start Application</button>
+        ) : (
+            <form className="reservePlan-container-leasing-form" onSubmit={handleLease}>
+                <label className="reservePlan-container-leasing-label">Lease Term:</label>
+                <select 
+                    className="reservePlan-container-leasing-select"
+                    value={leaseTerm}
+                    onChange={(e) => setLeaseTerm(e.target.value)}
+                >
+                    <option value="3">3 Months</option>
+                    <option value="6">6 Months</option>
+                    <option value="9">9 Months</option>
+                    <option value="12">12 Months</option>
+                    <option value="13">13 Months</option>
+                </select>
+                
+                <label className="reservePlan-container-leasing-label">Rent: ${property?.rent_price}/Month</label>
+                {error && <p className="error-message">{error}</p>}
+                <button type="submit" className="reservePlan-container-leasing-button">Start Application</button>
+            </form>
+        )}
     </div>
 );
 

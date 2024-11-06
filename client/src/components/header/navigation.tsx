@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import './navigation.css';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false); 
@@ -13,7 +14,7 @@ const Navigation = () => {
     return (
         <div className="navigation-container">
             <div className="logo-container">
-                <h1 className="logo-text">LeaseNow</h1>
+                <Link to='/'><h1 className="logo-text">LeaseNow</h1></Link>
             </div>
             <div className="hamburger" onClick={toggleMenu}>
                 {isOpen ? (
@@ -26,7 +27,6 @@ const Navigation = () => {
                 <ul className="navigation-list">
                     <li><a href="/floorplans" className="navigation-link">Floorplans</a></li>
                     <li><a href="/amenities" className="navigation-link">Amenities</a></li>
-                    <li><a href="/life" className="navigation-link">Life</a></li>
                     <li><a href="/residentPortal" className="navigation-link">Resident Portal</a></li>
                     <li><a href="/tour" className="navigation-link">Tour</a></li>
                     <li><a href="/contact" className="navigation-link">Contact</a></li>

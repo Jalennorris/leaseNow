@@ -6,6 +6,7 @@ import FloorPlans from './pages/floorPlans/floorplans'
 import ReservePlan from './pages/reservePlan/ReservePlan'
 import Register from './pages/Register/register'
 import Login from './pages/Login/login'
+import Amenities from './pages/Amenities/Amenities'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/floorplans" element={<FloorPlans />} />
           <Route path="/floorplans/:propertyId/reserve" element={<ReservePlan />} />
+          <Route  path='amenities' element={<Amenities/>}/> 
 
           //
           <Route path='register' element={<Register />}/>
