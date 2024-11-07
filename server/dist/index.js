@@ -11,6 +11,7 @@ import propertiesRoute from './routes/propertiesRoute.js';
 import leaseRoute from './routes/leaseRoute.js';
 import paymentRoute from './routes/paymentRoute.js';
 import reviewRoute from './routes/reviewRoute..js';
+import contactRoute from './routes/controllerRoute.js';
 //node dist/index.js
 dotenv.config();
 const app = express();
@@ -44,6 +45,7 @@ app.use('/api/properties', propertiesRoute);
 app.use('/api/leases', leaseRoute);
 app.use('/api/payments', paymentRoute);
 app.use('/api/reviews', reviewRoute);
+app.use('/api/contacts', contactRoute);
 // Middleware for setting secure cookies
 app.use((req, res, next) => {
     res.cookie('name', 'value', {

@@ -74,6 +74,16 @@ CREATE TABLE reviews (
 );
 
 
+CREATE TABLE contacts(
+    contact_id SERIAl Primary key,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    message TEXT ,
+    checkbox BOOLEAN NOT NULL
+)
+
 
 
 

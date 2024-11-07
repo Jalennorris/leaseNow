@@ -7,6 +7,7 @@ import ReservePlan from './pages/reservePlan/ReservePlan'
 import Register from './pages/Register/register'
 import Login from './pages/Login/login'
 import Amenities from './pages/Amenities/Amenities'
+import Contact from './pages/Contact/contact'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           //
           <Route path='register' element={<Register />}/>
           <Route path='login' element={<Login />}/>
+          <Route path='contact' element={<Contact />}/>
 
         </Routes>
       </Router>
